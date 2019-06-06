@@ -1,4 +1,4 @@
-···java
+```java
     public void rotate(int[] nums, int k) {
         int len = nums.length;      // [1,2,3,4,5,6,7]
         if(k>nums.length) k = k%len;
