@@ -1,0 +1,25 @@
+```java
+class Solution {
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        List<List<Integer>> ans = new LinkedList<>();
+        helper(root, ans, 0);
+        return ans;
+    }
+    
+    private void helper(TreeNode root, List<List<Integer>> ans, int level) {
+        if(root==null) return ;
+        if(ans.size()<=level)
+            ans.add(new ArrayList<>());
+        if(level%2==0) {
+            ans.get(level).add(root.val);
+        } else {
+            ans.get(level).add(0, root.val);
+        }
+        helper(root.left, ans, level+1);
+        helper(root.right, ans, level+1);
+    }
+}
+```
+
+##### * Time: O(N)
+##### * Space: O(N)
