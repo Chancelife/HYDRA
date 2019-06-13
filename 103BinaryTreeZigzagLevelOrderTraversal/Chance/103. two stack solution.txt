@@ -1,0 +1,43 @@
+```java
+class Solution {
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        List<List<Integer>> ans = new LinkedList<>();
+        if(root==null) return ans;
+        int level = 0;
+        List<Integer> temp = new LinkedList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        Stack<TreeNode> stack2 = new Stack<>();
+        stack.add(root);
+        while(!stack.isEmpty()) {
+            if(!stack.isEmpty()) {
+                int size = stack.size();
+                // System.out.println(size);
+                for(int i=0;i<size;i++) {
+                    TreeNode curr = stack.pop();
+                    temp.add(curr.val);
+                    if(level%2==0) lrPush(curr, stack2);
+                    else rlPush(curr, stack2);
+                }
+            }
+            level++;
+            stack = (Stack)stack2.clone();
+            stack2 = new Stack<>();
+            ans.add(new LinkedList(temp));
+            temp = new LinkedList<>();
+        }
+        return ans;
+    }
+    
+    private void rlPush(TreeNode root, Stack<TreeNode> stack) {
+        if(root.right!=null) stack.push(root.right);
+        if(root.left!=null) stack.push(root.left);
+    }
+    private void lrPush(TreeNode root, Stack<TreeNode> stack) {
+        if(root.left!=null) stack.push(root.left);
+        if(root.right!=null) stack.push(root.right);
+    }
+}
+```
+
+##### * Time: O(N)
+##### * Space: O(N) // Stack at most N/2 
